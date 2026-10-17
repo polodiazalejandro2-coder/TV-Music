@@ -53,10 +53,24 @@ function drawTrack(title, artist, image) {
     if (image) {
         const imageWidth = image.naturalWidth || image.width;
         const imageHeight = image.naturalHeight || image.height;
-        const scale = Math.min(200 / imageWidth, 200 / imageHeight);
-        const width = imageWidth * scale;
-        const height = imageHeight * scale;
-        artworkContext.drawImage(image, 50 + (200 - width) / 2, 20 + (200 - height) / 2, width, height);
+        const frame = { x: 50, y: 20, size: 200 };
+        const coverScale = Math.max(frame.size / imageWidth, frame.size / imageHeight);
+        const cropWidth = frame.size / coverScale;
+        const cropHeight = frame.size / coverScale;
+        const cropX = (imageWidth - cropWidth) / 2;
+        const cropY = (imageHeight - cropHeight) / 2;
+
+        artworkContext.drawImage(
+            image,
+            cropX,
+            cropY,
+            cropWidth,
+            cropHeight,
+            frame.x,
+            frame.y,
+            frame.size,
+            frame.size
+        );
     }
 
     artworkContext.fillStyle = '#ffffff';
