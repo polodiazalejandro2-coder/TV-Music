@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "howler": "^2.2.4",
+    "three": "^0.186.1"
+  }
+}
